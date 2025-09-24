@@ -68,7 +68,7 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .btn:hover { transform: translateY(-3px); background-color: #459cff; }
         section { padding: 5rem 0; }
@@ -106,8 +106,19 @@
         }
         .terms-container a { color: var(--light-text); cursor: pointer; text-decoration: underline; }
         .terms-container input { margin-right: 0.5rem; transform: scale(1.2); }
-        #downloadBtn { background: #4a5568; cursor: not-allowed; }
-        #downloadBtn:not(:disabled) { background: var(--secondary-color); cursor: pointer; }
+        
+        /* CORREÇÃO: Estilo para o botão de download desabilitado */
+        #downloadBtn.disabled {
+            background: #4a5568;
+            cursor: not-allowed;
+            pointer-events: none; /* A parte mais importante: bloqueia o clique */
+            opacity: 0.6;
+        }
+        #downloadBtn:not(.disabled) {
+            background: var(--secondary-color);
+            cursor: pointer;
+        }
+
         #support { background-color: var(--card-bg); }
         .support-box { text-align: center; max-width: 800px; margin: 0 auto; }
         .support-box .btn { margin: 0.5rem; }
@@ -249,7 +260,7 @@
                     <label for="privacyCheckbox">I agree to the <a id="privacyLinkDownload">Privacy Policy</a></label>
                 </div>
 
-                <a id="downloadBtn" href="YOUR_DIRECT_DOWNLOAD_LINK_HERE" class="btn" disabled>Download for Windows</a>
+                <a id="downloadBtn" href="YOUR_DIRECT_DOWNLOAD_LINK_HERE" class="btn disabled">Download for Windows</a>
             </div>
         </section>
     </main>
@@ -304,21 +315,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // MUDANÇA: Lógica de Download atualizada para dois checkboxes
             const termsCheckbox = document.getElementById('termsCheckbox');
             const privacyCheckbox = document.getElementById('privacyCheckbox');
             const downloadBtn = document.getElementById('downloadBtn');
 
+            // CORREÇÃO: Lógica de JS para usar a classe .disabled em vez do atributo
             function updateDownloadButtonState() {
-                if (termsCheckbox.checked && privacyCheckbox.checked) {
-                    downloadBtn.disabled = false;
-                } else {
-                    downloadBtn.disabled = true;
-                }
+                const isEnabled = termsCheckbox.checked && privacyCheckbox.checked;
+                downloadBtn.classList.toggle('disabled', !isEnabled);
             }
 
             termsCheckbox.addEventListener('change', updateDownloadButtonState);
             privacyCheckbox.addEventListener('change', updateDownloadButtonState);
+            
+            // Força a verificação inicial no carregamento da página
+            updateDownloadButtonState();
 
             // Modal Opening/Closing Logic
             const modalTriggers = {
@@ -326,7 +337,7 @@
                 'privacyLinkFooter': 'privacyModal',
                 'termsLinkFooter': 'termsModal',
                 'termsLinkDownload': 'termsModal',
-                'privacyLinkDownload': 'privacyModal' // MUDANÇA: Adicionado gatilho para o novo link
+                'privacyLinkDownload': 'privacyModal'
             };
 
             const openModal = (modalId) => {
