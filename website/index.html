@@ -44,13 +44,12 @@
             display: flex;
             align-items: center;
         }
-        /* ESTILO PARA O ÍCONE NO MENU ADICIONADO AQUI */
         .logo img {
             height: 32px;
             margin-right: 12px;
             vertical-align: middle;
         }
-        nav ul { display: flex; list-style: none; }
+        nav ul { display: flex; list-style: none; align-items: center; }
         nav ul li { margin-left: 2rem; }
         nav a { color: var(--light-text); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
         nav a:hover { color: var(--secondary-color); }
@@ -98,7 +97,13 @@
             max-width: 700px;
             margin: 0 auto;
         }
-        .terms-container { margin: 2rem 0; display: flex; justify-content: center; align-items: center; }
+        .terms-container { 
+            margin-top: 1rem; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            font-size: 0.9rem;
+        }
         .terms-container a { color: var(--light-text); cursor: pointer; text-decoration: underline; }
         .terms-container input { margin-right: 0.5rem; transform: scale(1.2); }
         #downloadBtn { background: #4a5568; cursor: not-allowed; }
@@ -166,6 +171,7 @@
                 <li><a href="#article">About</a></li>
                 <li><a href="#support">Support Us</a></li>
                 <li><a href="#download">Download</a></li>
+                <li><a href="mailto:servicecorefinance@gmail.com">Contact Us</a></li>
             </ul>
         </nav>
     </header>
@@ -233,10 +239,16 @@
             <div class="container download-box">
                 <h2>Download Core Finance</h2>
                 <p>Get the latest version for Windows. It's free and ready to help you organize your finances.</p>
+                
                 <div class="terms-container">
                     <input type="checkbox" id="termsCheckbox">
                     <label for="termsCheckbox">I agree to the <a id="termsLinkDownload">Terms and Conditions</a></label>
                 </div>
+                <div class="terms-container">
+                    <input type="checkbox" id="privacyCheckbox">
+                    <label for="privacyCheckbox">I agree to the <a id="privacyLinkDownload">Privacy Policy</a></label>
+                </div>
+
                 <a id="downloadBtn" href="YOUR_DIRECT_DOWNLOAD_LINK_HERE" class="btn" disabled>Download for Windows</a>
             </div>
         </section>
@@ -286,24 +298,35 @@
         <div class="container">
             <p>&copy; 2025 Core Finance. All Rights Reserved.</p>
             <p><a id="privacyLinkFooter">Privacy Policy</a> | <a id="termsLinkFooter">Terms & Conditions</a></p>
+            <p>Contact: <a href="mailto:servicecorefinance@gmail.com">servicecorefinance@gmail.com</a></p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Download Button Logic
+            // MUDANÇA: Lógica de Download atualizada para dois checkboxes
             const termsCheckbox = document.getElementById('termsCheckbox');
+            const privacyCheckbox = document.getElementById('privacyCheckbox');
             const downloadBtn = document.getElementById('downloadBtn');
-            termsCheckbox.addEventListener('change', function() {
-                downloadBtn.disabled = !this.checked;
-            });
+
+            function updateDownloadButtonState() {
+                if (termsCheckbox.checked && privacyCheckbox.checked) {
+                    downloadBtn.disabled = false;
+                } else {
+                    downloadBtn.disabled = true;
+                }
+            }
+
+            termsCheckbox.addEventListener('change', updateDownloadButtonState);
+            privacyCheckbox.addEventListener('change', updateDownloadButtonState);
 
             // Modal Opening/Closing Logic
             const modalTriggers = {
                 'pixBtn': 'pixModal',
                 'privacyLinkFooter': 'privacyModal',
                 'termsLinkFooter': 'termsModal',
-                'termsLinkDownload': 'termsModal'
+                'termsLinkDownload': 'termsModal',
+                'privacyLinkDownload': 'privacyModal' // MUDANÇA: Adicionado gatilho para o novo link
             };
 
             const openModal = (modalId) => {
