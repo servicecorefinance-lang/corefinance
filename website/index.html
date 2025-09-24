@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Core Finance - Smart Financial Management Software</title>
     <meta name="description" content="Take control of your personal and business finances with Core Finance, a powerful, secure, and intuitive desktop application for Windows. Manage multiple profiles, track transactions, and generate detailed reports.">
+    
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -35,7 +38,18 @@
             z-index: 100;
         }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 700; }
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        /* ESTILO PARA O ÍCONE NO MENU ADICIONADO AQUI */
+        .logo img {
+            height: 32px;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
         nav ul { display: flex; list-style: none; }
         nav ul li { margin-left: 2rem; }
         nav a { color: var(--light-text); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
@@ -143,7 +157,10 @@
 
     <header>
         <nav class="container">
-            <div class="logo">Core Finance</div>
+            <div class="logo">
+                <img src="assets/icon.png" alt="Core Finance Logo">
+                <span>Core Finance</span>
+            </div>
             <ul>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#article">About</a></li>
@@ -239,14 +256,14 @@
         <div class="modal-content policy-modal">
             <button class="close-modal">&times;</button>
             <h1>Privacy Policy for Core Finance</h1>
-            <p><strong>Last Updated: September 23, 2025</strong></p>
+            <p><strong>Last Updated: September 24, 2025</strong></p>
             <p>This Privacy Policy describes how Core Finance handles your information. Our commitment is to your privacy, and our policy is simple: we do not collect, store, or transmit any of your personal or financial data.</p>
             <h2>1. No Data Collection</h2>
             <p>Core Finance is a desktop application that operates entirely offline. All data you input into the application, including but not limited to transactions, categories, contacts, notes, audio recordings, and profile information, is stored exclusively on your local computer's hard drive. Your data is never sent to our servers or any third-party servers.</p>
             <h2>2. Local Storage</h2>
             <p>All your information is saved in your local storage, within the application's designated data path on your operating system. You have full control over this data. The security and maintenance of the computer on which the software is installed are the user's responsibility.</p>
             <h2>3. Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at: **your-email@example.com**</p>
+            <p>If you have any questions about this Privacy Policy, please contact us at: <strong><a href="mailto:servicecorefinance@gmail.com">servicecorefinance@gmail.com</a></strong></p>
         </div>
     </div>
 
@@ -254,7 +271,7 @@
         <div class="modal-content policy-modal">
             <button class="close-modal">&times;</button>
             <h1>Terms and Conditions</h1>
-            <p><strong>Last Updated: September 23, 2025</strong></p>
+            <p><strong>Last Updated: September 24, 2025</strong></p>
             <p>Please read these terms and conditions carefully before using the Core Finance application (the "Software").</p>
             <h2>1. Acceptance of Terms</h2>
             <p>By downloading, installing, or using the Software, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, do not use the Software.</p>
